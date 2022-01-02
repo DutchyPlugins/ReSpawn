@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -20,8 +21,12 @@ public class PlayerRespawnEventListener implements Listener {
 		this.module = module;
 	}
 	
-	@EventHandler
-	public void onPlayerRespawnEvent(PlayerRespawnEvent event) {		
+	@EventHandler(priority = EventPriority.HIGH)
+	public void onPlayerRespawnEvent(PlayerRespawnEvent event) {
+		if(event.getPlayer().getBedSpawnLocation() == null) {
+			return;
+		}
+
 		String spawnPos = (String) this.module.getModuleFileHandler().getModuleConfiguration().getValue("spawnPos"); 
 		if(spawnPos == null) {
 			return;
