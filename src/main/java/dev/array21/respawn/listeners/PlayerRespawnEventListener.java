@@ -23,7 +23,7 @@ public class PlayerRespawnEventListener implements Listener {
 	
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onPlayerRespawnEvent(PlayerRespawnEvent event) {
-		if(event.getPlayer().getBedSpawnLocation() == null) {
+		if(event.getPlayer().getBedSpawnLocation() != null) {
 			return;
 		}
 
